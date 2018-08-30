@@ -14,7 +14,7 @@ import {Component} from '@angular/core';
       top: 0;
       bottom: 0;
       background: white;
-      opacity: 0.5;
+      opacity: 0.6;
     }
   `]
 })

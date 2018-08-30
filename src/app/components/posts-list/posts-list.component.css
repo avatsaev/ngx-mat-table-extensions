@@ -15,3 +15,7 @@ table {
   padding: 10px;
 }
 
+.table-container{
+  position: relative;
+}
+
