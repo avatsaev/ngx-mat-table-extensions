@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PostsService } from './services/posts.service';
 import { PostsListComponent } from './components/posts-list/posts-list.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material';
+import {VeilComponent} from './components/veil/veil.component';
+import {MaterialModule} from './material.module';
+import {MatTableFilterFormModule} from 'ngx-mat-table-extensions';
+
+
 
 
 
@@ -18,11 +20,15 @@ import {MatSortModule} from '@angular/material';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    MatTableFilterFormModule
   ],
-  declarations: [ AppComponent, PostsListComponent ],
+  declarations: [
+    AppComponent,
+    PostsListComponent,
+    VeilComponent
+  ],
   bootstrap:    [ AppComponent ],
   providers: [PostsService]
 })

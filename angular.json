@@ -121,6 +121,46 @@
           }
         }
       }
+    },
+    "mat-table-extensions": {
+      "root": "projects/mat-table-extensions",
+      "sourceRoot": "projects/mat-table-extensions/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/mat-table-extensions/tsconfig.lib.json",
+            "project": "projects/mat-table-extensions/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/mat-table-extensions/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mat-table-extensions/src/test.ts",
+            "tsConfig": "projects/mat-table-extensions/tsconfig.spec.json",
+            "karmaConfig": "projects/mat-table-extensions/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mat-table-extensions/tsconfig.lib.json",
+              "projects/mat-table-extensions/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "data-table"

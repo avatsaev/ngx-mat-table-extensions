@@ -1,0 +1,22 @@
+<div *ngIf="filterFields && filterFields.length; else noFields" class="filter-form">
+  <mat-form-field class="filter--field-selector">
+    <mat-select [formControl]="filterFieldNameFromControl" placeholder="Filtered field">
+      <mat-option *ngFor="let field of filterFields" [value]="field">
+        {{field}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="filter--field-value">
+    <input matInput name="filter" [formControl]="filterValueFormControl" placeholder="Filter">
+    <button mat-button *ngIf="filterValueFormControl.value.length" matSuffix mat-icon-button aria-label="Clear" (click)="filterValueFormControl.patchValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<ng-template #noFields>
+  <span style="color: red; background: rgba(255,0,0, 0.07); padding: 10px; border: 1px red solid">
+    ERROR: Filter form requires field names to filter by, please specify <u><b><code>filterFields</code></b></u> input.
+  </span>
+</ng-template>

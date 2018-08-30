@@ -1,40 +1,50 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import {map, throttleTime} from 'rxjs/operators';
 import {Post} from '../models/post';
-import {DataSourceService, SortOptions} from '../models/data-source-service.model';
+
+import {compareBy, dataFilter} from '../helpers';
+import {
+  DataSourceService,
+  HttpDataSourceFilter,
+  HttpDataSourceSort
+} from 'ngx-mat-table-extensions';
+
+
 @Injectable()
 export class PostsService implements DataSourceService<Post> {
 
   constructor(private http: HttpClient) { }
 
-  index(offset = 0, limit = 10, sort?: SortOptions) {
+  index(offset = 0, limit = 10, sort?: HttpDataSourceSort, filter?: HttpDataSourceFilter) {
     return this.http.get<Post[]>('https://jsonplaceholder.typicode.com/posts').pipe(
-      map(posts => ({
-        total: posts.length,
-        data: sort ?
-          posts.splice(offset, limit).sort(compareBy(sort.field, sort.asc)) :
-          posts.splice(offset, limit),
-        offset,
-        limit,
-      }))
+      map(posts => {
+
+        // this part simulates the pagination, sorting, filtering on the backend
+
+        let data = [...posts];
+
+        if (sort) { // sort
+          data = data.sort(compareBy(sort.field, sort.asc));
+        }
+
+        if (filter) { // filter
+          data = dataFilter(data, filter);
+        }
+
+        const total = data.length;
+
+        data = data.splice(offset, limit); // paginate
+
+        return {
+          total,
+          data
+        };
+
+      })
+
     );
+
   }
 
 }
-
-
-
-
-const compareBy = (fieldName: string, asc) => (a, b) => {
-
-  if (a[fieldName] < b[fieldName]) {
-    return asc ? -1 : 1;
-  }
-
-  if (a[fieldName] > b[fieldName]) {
-    return  asc ? 1 : -1;
-  }
-  return 0;
-
-};

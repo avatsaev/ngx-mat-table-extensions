@@ -1,0 +1,20 @@
+.filter-form {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.filter--field-selector {
+  flex-basis: 20%;
+  margin-right: 10px;
+}
+
+.filter--field-value {
+  flex-basis: 80%;
+  margin-right: 10px;
+}
+
+.table-container{
+  position: relative;
+}

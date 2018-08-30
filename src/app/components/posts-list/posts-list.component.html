@@ -1,39 +1,55 @@
- <div  class="mat-elevation-z8">
+<div class="mat-elevation-z8 main-container">
 
-  <table mat-table matSort [dataSource]="dataSource">
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+  <mat-table-filter-form
+    [filterFields]="displayedColumns"
+    [httpDataSource]="dataSource"
+  ></mat-table-filter-form>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="userId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> USER ID </th>
-      <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
-    </ng-container>
+  <!--<span *ngIf="dataSource.isLoading$ | async">LOADING...</span>-->
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> TITLE </th>
-      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-    </ng-container>
+  <div class="table-container">
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="body">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> BODY </th>
-      <td mat-cell *matCellDef="let element"> {{element.body}} </td>
-    </ng-container>
+    <app-veil *ngIf="dataSource.isLoading$ | async"></app-veil>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <table mat-table matSort [dataSource]="dataSource">
 
-    <!-------------------------------------------------------------->
 
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+        <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+      </ng-container>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <!-- Name Column -->
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> USER ID</th>
+        <td mat-cell *matCellDef="let element"> {{element.userId}}</td>
+      </ng-container>
 
- </div>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> TITLE</th>
+        <td mat-cell *matCellDef="let element"> {{element.title}}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="body">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> BODY</th>
+        <td mat-cell *matCellDef="let element"> {{element.body}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+      <!-------------------------------------------------------------->
+
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
+
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+
+</div>
  
