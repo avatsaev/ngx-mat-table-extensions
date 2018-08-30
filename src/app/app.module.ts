@@ -17,10 +17,8 @@ import {MatTableFilterFormModule} from 'ngx-mat-table-extensions';
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ReactiveFormsModule,
     MaterialModule,
     MatTableFilterFormModule
   ],
